@@ -4,7 +4,7 @@ import UserContext from '../context/userContext';
 import  '../styles/login.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function Login() {
     const  {LogedIn ,setLogedIn}  = useContext(UserContext)
@@ -26,7 +26,7 @@ function Login() {
     const formSubmit = async (e) => {
         e.preventDefault()
         try {
-            const user = await fetch("http://localhost:8000/login", {
+            const user = await fetch(`${BASE_URL}/api/login`, {
                 method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(val),
@@ -36,12 +36,13 @@ function Login() {
                 credentials: "include"
             });
             const userdata = await user.json()
+            console.log(userdata);
             setval({
 
                 email: '',
                 password: ''
             })
-            console.log(userdata);
+            
             if (userdata.msg === "true") {
                 setLogedIn(true)
                 toast.success("Logined")

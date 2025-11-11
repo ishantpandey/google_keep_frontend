@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './Sidebar';
 import img from '../img/images.png'
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function ViewAll() {
   const  {LogedIn,setLogedIn}= useContext(UserContext)
@@ -30,7 +31,7 @@ function ViewAll() {
 
 const resultData=async()=>{
   try {
-    const data= await fetch("http://localhost:8000/userdata",{
+    const data= await fetch(`${BASE_URL}/api/userdata`,{
       method:'GET',
       mode:'cors',
       headers:{
@@ -55,7 +56,7 @@ resultData()
 },[])
 const todoList=async()=>{
   try {
-    const data= await fetch("http://localhost:8000/todolist",{
+    const data= await fetch(`${BASE_URL}/api/todolist`,{
       method:'GET',
       mode:'cors',
       headers:{
@@ -77,7 +78,7 @@ useEffect(()=>{
 },[msg])
 //--------------------deleteItem-----------
 const deleteItem= async(id)=>{
-  const data= await fetch(`http://localhost:8000/deleteitem/${id}`,{
+  const data= await fetch(`${BASE_URL}/api/deleteitem/${id}`,{
     method:'DELETE',
     mode:'cors',
     headers:{
@@ -111,7 +112,7 @@ const updateItem= (id,description,titles)=>{
 
 }
 const updatedlist=async(itemid)=>{
-  const data= await fetch(`http://localhost:8000/updateitem/${itemid}`,{
+  const data= await fetch(`${BASE_URL}/api/updateitem/${itemid}`,{
         method:'PATCH',
         mode:'cors',
         body: JSON.stringify(val),

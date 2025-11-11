@@ -4,13 +4,13 @@ import '../styles/profile.css'
 import Sidebar from './Sidebar'
 import '../styles/sidebar.css'
 
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function Profile() {
   const navigate = useNavigate()
   const [val, setval] = useState([])
   const resultData = async () => {
-    const data = await fetch("http://localhost:8000/user", {
+    const data = await fetch(`${BASE_URL}/api/user`, {
       method: 'GET',
       mode: 'cors',
 

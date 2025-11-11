@@ -3,6 +3,8 @@ import { useNavigate,NavLink} from 'react-router-dom';
 import '../styles/login.css'
 
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 function Register() {
     const navigate =useNavigate()
     const [val,setval]=useState({
@@ -23,7 +25,7 @@ function Register() {
     const formSubmit=async(e)=>{
          e.preventDefault()
          try {
-            const userData= await fetch("http://localhost:8000/register",{
+            const userData= await fetch(`${BASE_URL}/api/register`,{
                 method:'POST',
                 mode:'cors',
                 body:JSON.stringify(val),

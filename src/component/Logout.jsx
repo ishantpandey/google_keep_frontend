@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function Logout() {
    
@@ -15,7 +15,7 @@ function Logout() {
 
         
         try {
-            const res = await fetch('http://localhost:8000/logout', {
+            const res = await fetch(`${BASE_URL}/api/logout`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'
