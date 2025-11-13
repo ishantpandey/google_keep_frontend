@@ -34,11 +34,12 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Deploy to EC2 
+      - name: Remove current container and image, then deploy latest
         run: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
           docker stop google-keep-frontend || true
           docker rm google-keep-frontend || true
+          docker rmi ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest || true
+          docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
           docker run -d --name google-keep-frontend \
             -p 80:3000 \
             -e REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL }} \

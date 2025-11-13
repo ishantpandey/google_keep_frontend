@@ -180,6 +180,7 @@ const updatedlist=async(itemid)=>{
         <div className='container-fluid'>
           <div className='row '>
           <div className=' col-11 col-md-7 mt-5 center mx-auto'>
+            {process.env.REACT_APP_BASE_URL}
         <form className="form-inline my-2 my-lg-0 " onSubmit={insertData} style={{maxWidth :"60rem"}}>
              
              <div className='formcontent '>
