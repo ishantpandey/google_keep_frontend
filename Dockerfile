@@ -1,20 +1,25 @@
-# Use official Node.js LTS image
-FROM node:18-alpine
+# 1️⃣ Build Stage (React)
+FROM node:18-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Accept build-time variable
+ARG REACT_APP_BASE_URL
+ENV REACT_APP_BASE_URL=$REACT_APP_BASE_URL
 
-# Install dependencies
+COPY package*.json ./
 RUN npm install
 
-# Copy backend source code
 COPY . .
 
-# Expose backend port (change if needed)
-EXPOSE 3000
+# React will read the env at build time
+RUN npm run build
 
-# Start the backend server
-CMD ["npm", "start"]
+# 2️⃣ Serve with Nginx
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

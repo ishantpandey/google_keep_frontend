@@ -22,6 +22,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Pass env DURING BUILD — important for React
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -29,18 +30,21 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
+          build-args: |
+            REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL }}
 
   deploy:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Remove current container and image, then deploy latest
+      - name: Deploy latest frontend
         run: |
-          docker stop google-keep-frontend || true
-          docker rm google-keep-frontend || true
-          docker rmi ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest || true
-          docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
-          docker run -d --restart always --name google-keep-frontend \
-            -p 80:3000 \
-            -e REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL }} \
+          sudo docker stop google-keep-frontend || true
+          sudo docker rm google-keep-frontend || true
+          sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest || true
+
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
+          
+          sudo docker run -d --restart always --name google-keep-frontend \
+            -p 80:80 \
             ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
