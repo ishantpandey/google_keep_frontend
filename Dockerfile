@@ -16,9 +16,6 @@ RUN npm run build
 # 2️⃣ Serve with Nginx
 FROM nginx:alpine
 
-# Copy custom nginx config (important for React Router)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 3000
