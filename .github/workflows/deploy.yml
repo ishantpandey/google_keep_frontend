@@ -46,5 +46,5 @@ jobs:
           
           docker run -d --restart always --name google-keep-frontend \
             --network mern-net \
-            -p 3000:80 \
+            -p 80:80 \
             ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
