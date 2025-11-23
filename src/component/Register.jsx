@@ -25,7 +25,7 @@ function Register() {
     const formSubmit=async(e)=>{
          e.preventDefault()
          try {
-            const userData= await fetch(`${BASE_URL}/api/register`,{
+            const userData= await fetch(`${BASE_URL}/v1/register`,{
                 method:'POST',
                 mode:'cors',
                 body:JSON.stringify(val),

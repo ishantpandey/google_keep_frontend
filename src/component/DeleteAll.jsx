@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const DeleteAll = () => {
     const navigate=useNavigate()
     const deleteAllItem= async(id)=>{
-        const data= await fetch(`${BASE_URL}/api/deleteallitem`,{
+        const data= await fetch(`${BASE_URL}/deleteallitem`,{
           method:'DELETE',
           mode:'cors',
           headers:{

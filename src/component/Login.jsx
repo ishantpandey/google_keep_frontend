@@ -26,7 +26,7 @@ function Login() {
     const formSubmit = async (e) => {
         e.preventDefault()
         try {
-            const user = await fetch(`${BASE_URL}/api/login`, {
+            const user = await fetch(`${BASE_URL}/v1/login`, {
                 method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(val),

@@ -31,7 +31,7 @@ function Home() {
       if (val.desc == "") {
         toast.warning("Please insert an item first");
       } else {
-        const inserItem = await fetch(`${BASE_URL}/api/insertitem`, {
+        const inserItem = await fetch(`${BASE_URL}/v1/insertitem`, {
           method: "POST",
           mode: "cors",
           body: JSON.stringify(val),
@@ -55,7 +55,7 @@ function Home() {
 
   const resultData = async () => {
     try {
-      const data = await fetch(`${BASE_URL}/api/userdata`, {
+      const data = await fetch(`${BASE_URL}/v1/userdata`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -77,7 +77,7 @@ function Home() {
   }, []);
   const todoList = async () => {
     try {
-      const data = await fetch(`${BASE_URL}/api/todolist`, {
+      const data = await fetch(`${BASE_URL}/v1/todolist`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -98,7 +98,7 @@ function Home() {
   }, [msg]);
   //--------------------deleteItem-----------
   const deleteItem = async (id) => {
-    const data = await fetch(`${BASE_URL}/api/deleteitem/${id}`, {
+    const data = await fetch(`${BASE_URL}/v1/deleteitem/${id}`, {
       method: "DELETE",
       mode: "cors",
       headers: {
@@ -125,7 +125,7 @@ function Home() {
     setupdatebtn(false);
   };
   const updatedlist = async (itemid) => {
-    const data = await fetch(`${BASE_URL}/api/updateitem/${itemid}`, {
+    const data = await fetch(`${BASE_URL}/v1/updateitem/${itemid}`, {
       method: "PATCH",
       mode: "cors",
       body: JSON.stringify(val),
@@ -150,7 +150,9 @@ function Home() {
   return (
     <>
       <div className="container-fluid mt-5">
+       
         <div className="row  ">
+          
           {LogedIn ? (
             <div className="col-2 col-md-1  sidebar ">
               <Sidebar />
@@ -159,6 +161,7 @@ function Home() {
           <div className="col-10 col-md-11 mx-5 center">
             <div className="container-fluid">
               <div className="row ">
+                 {BASE_URL}/v1
                 <div className=" col-11 col-md-7 mt-5 center mx-auto">
                   <form
                     className="form-inline my-2 my-lg-0 "

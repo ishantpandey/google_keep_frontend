@@ -15,7 +15,7 @@ function Logout() {
 
         
         try {
-            const res = await fetch(`${BASE_URL}/api/logout`, {
+            const res = await fetch(`${BASE_URL}/v1/logout`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'

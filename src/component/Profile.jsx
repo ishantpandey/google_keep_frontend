@@ -10,7 +10,7 @@ function Profile() {
   const navigate = useNavigate()
   const [val, setval] = useState([])
   const resultData = async () => {
-    const data = await fetch(`${BASE_URL}/api/user`, {
+    const data = await fetch(`${BASE_URL}/v1/user`, {
       method: 'GET',
       mode: 'cors',
 

@@ -31,7 +31,7 @@ function ViewAll() {
 
 const resultData=async()=>{
   try {
-    const data= await fetch(`${BASE_URL}/api/userdata`,{
+    const data= await fetch(`${BASE_URL}/v1/userdata`,{
       method:'GET',
       mode:'cors',
       headers:{
@@ -56,7 +56,7 @@ resultData()
 },[])
 const todoList=async()=>{
   try {
-    const data= await fetch(`${BASE_URL}/api/todolist`,{
+    const data= await fetch(`${BASE_URL}/v1/todolist`,{
       method:'GET',
       mode:'cors',
       headers:{
@@ -78,7 +78,7 @@ useEffect(()=>{
 },[msg])
 //--------------------deleteItem-----------
 const deleteItem= async(id)=>{
-  const data= await fetch(`${BASE_URL}/api/deleteitem/${id}`,{
+  const data= await fetch(`${BASE_URL}/v1/deleteitem/${id}`,{
     method:'DELETE',
     mode:'cors',
     headers:{
@@ -112,7 +112,7 @@ const updateItem= (id,description,titles)=>{
 
 }
 const updatedlist=async(itemid)=>{
-  const data= await fetch(`${BASE_URL}/api/updateitem/${itemid}`,{
+  const data= await fetch(`${BASE_URL}/v1/updateitem/${itemid}`,{
         method:'PATCH',
         mode:'cors',
         body: JSON.stringify(val),
