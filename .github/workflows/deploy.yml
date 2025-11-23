@@ -1,4 +1,4 @@
-name: Deploy frontend
+name: Deploy Frontend
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,7 +21,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Pass env DURING BUILD — important for React
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -39,12 +37,14 @@ jobs:
     steps:
       - name: Deploy latest frontend
         run: |
-          sudo docker stop google-keep-frontend || true
-          sudo docker rm google-keep-frontend || true
-          sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest || true
+          docker network create mern-net || true
 
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
+          docker rm -f google-keep-frontend || true
+          docker rmi ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest || true
+
+          docker pull ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
           
-          sudo docker run -d --restart always --name google-keep-frontend \
-            -p 80:80 \
+          docker run -d --restart always --name google-keep-frontend \
+            --network mern-net \
+            -p 127.0.0.1:3000:3000 \
             ${{ secrets.DOCKER_USERNAME }}/google-keep-frontend:latest
