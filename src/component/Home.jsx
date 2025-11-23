@@ -161,7 +161,7 @@ function Home() {
           <div className="col-10 col-md-11 mx-5 center">
             <div className="container-fluid">
               <div className="row ">
-                 {BASE_URL}/v1
+                
                 <div className=" col-11 col-md-7 mt-5 center mx-auto">
                   <form
                     className="form-inline my-2 my-lg-0 "
@@ -208,6 +208,7 @@ function Home() {
                       </div>
                     </div>
                   </form>
+                   {BASE_URL}
                 </div>
               </div>
             </div>
